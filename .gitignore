@@ -7,3 +7,5 @@
 .idea
 
 .serverless
+
+npm-debug.log
