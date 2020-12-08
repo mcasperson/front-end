@@ -14,6 +14,7 @@ var request      = require("request")
   , user         = require("./api/user")
   , metrics      = require("./api/metrics")
   , app          = express()
+  , serverless   = require('serverless-http')
 
 
 app.use(helpers.rewriteSlash);
@@ -52,7 +53,13 @@ app.use(user);
 
 app.use(helpers.errorHandler);
 
-var server = app.listen(process.env.PORT || 8079, function () {
-  var port = server.address().port;
-  console.log("App now running in %s mode on port %d", app.get("env"), port);
-});
+if (!process.env.LAMBDA_TASK_ROOT) {
+    var server = app.listen(process.env.PORT || 8079, function () {
+        var port = server.address().port;
+        console.log("App now running in %s mode on port %d", app.get("env"), port);
+    });
+} else {
+    module.exports.handler = serverless(app);
+}
+
+
