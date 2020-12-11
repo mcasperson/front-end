@@ -14,7 +14,7 @@ var request      = require("request")
   , user         = require("./api/user")
   , metrics      = require("./api/metrics")
   , app          = express()
-  , serverless   = require('serverless-http')
+  , awsServerlessExpress = require('aws-serverless-express')
 
 
 app.use(helpers.rewriteSlash);
@@ -59,7 +59,8 @@ if (!process.env.LAMBDA_TASK_ROOT) {
         console.log("App now running in %s mode on port %d", app.get("env"), port);
     });
 } else {
-    module.exports.handler = serverless(app);
+    const server = awsServerlessExpress.createServer(app)
+    exports.handler = (event, context) => { awsServerlessExpress.proxy(server, event, context) }
 }
 
 
