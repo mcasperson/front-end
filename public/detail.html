@@ -200,7 +200,7 @@ _________________________________________________________ -->
         if (id == null || id == "") {
             document.location.href = "/";
         }
-        $.getJSON('/catalogue/' + id, function (data) {
+        $.getJSON('catalogue/' + id, function (data) {
             $("#title").text(data.name);
             $("#breadcrumb").text(data.name);
             $("#price").text("$" + data.price.toFixed(2));
@@ -218,7 +218,7 @@ _________________________________________________________ -->
             $("#thumbs").append(thumbHtml);
             $("#description").text(data.description);
 
-            $.getJSON('/catalogue', {sort: "id", size: 3, tags: data.tag[0]}, function (data) {
+            $.getJSON('catalogue', {sort: "id", size: 3, tags: data.tag[0]}, function (data) {
                 if (data != null) {
                     $.each(data, function (index, element) {
                         $('#products').append('<div class="col-md-3 col-sm-4">\

@@ -361,7 +361,7 @@ _________________________________________________________ -->
             contentType: "application/json; charset=utf-8"
         });
 
-        $.getJSON('/cart', {}, function (data) {
+        $.getJSON('cart', {}, function (data) {
             if (data != null) {
                 var cartTotal = 0;
                 var numItemsInCart = 0;
@@ -369,7 +369,7 @@ _________________________________________________________ -->
                 var orderPlaced = false;
                 $.each(data, function (index, element) {
                     if (element != null && element.itemId != null && element.itemId != "null") {
-                        $.getJSON('/catalogue/' + element.itemId, function (data) {
+                        $.getJSON('catalogue/' + element.itemId, function (data) {
                             console.log(JSON.stringify(data));
                             $('#cart-list').append(' <tr class="item">\
                                                 <input class="id" type="hidden" value="' + data.id + '">\
@@ -424,7 +424,7 @@ _________________________________________________________ -->
             }
         });
 
-        $.getJSON('/card', function(data) {
+        $.getJSON('card', function(data) {
             if (data.status_code !== 500) {
                 $("p#number").text("Card ending in " + data.number).css("color", "black");
                 $("#add_payment").hide();
@@ -434,7 +434,7 @@ _________________________________________________________ -->
             }
         });
 
-        $.getJSON('/address', function(data) {
+        $.getJSON('address', function(data) {
             if (data.status_code !== 500) {
                 var text = data.number + " ";
                 text += data.street
@@ -452,7 +452,7 @@ _________________________________________________________ -->
             }
         });
 
-        $.getJSON('/catalogue', {size: 3}, function (data) {
+        $.getJSON('catalogue', {size: 3}, function (data) {
             if (data != null) {
                 $.each(data, function (index, element) {
                     $('#youMayAlsoLike').append(

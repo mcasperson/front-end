@@ -210,12 +210,12 @@ _________________________________________________________ -->
             $("#tabAccount").remove()
         }
 
-        $.getJSON('/cart', {}, function (data) {
+        $.getJSON('cart', {}, function (data) {
             if (data != null) {
                 var numItemsInCart = 0;
                 $.each(data, function (index, element) {
                     if (element != null && element.itemId != null && element.itemId != "null") {
-                        $.getJSON('/catalogue/' + element.itemId, function (data) {
+                        $.getJSON('catalogue/' + element.itemId, function (data) {
                             numItemsInCart = numItemsInCart + element.quantity;
                         }).always(function () {
                             $('#numItemsInCart').text(numItemsInCart + ' item(s) in cart');

@@ -163,7 +163,7 @@ _________________________________________________________ -->
 
 <script>
     $(document).ready(function () {
-        $.getJSON('/orders', {}, function (data) {
+        $.getJSON('orders', {}, function (data) {
                     $.each(data, function (index, element) {
                         var selfRef = element._links.self.href;
                         var split = selfRef.split("/");

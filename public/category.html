@@ -186,7 +186,7 @@ _________________________________________________________ -->
                 var page = $.query.get('page') ? $.query.get('page') : 1;
                 var tags = $.query.get('tags') ? $.query.get('tags') : "";
 
-                $.getJSON('/catalogue/size', {tags: tags}, function (data) {
+                $.getJSON('catalogue/size', {tags: tags}, function (data) {
 		    if (data.size <= size) {
 			size = data.size;
 			}
@@ -219,7 +219,7 @@ _________________________________________________________ -->
                     $('#products-number').append(pageSizeHtml);
                 });
 
-                $.getJSON('/tags', function (data) {
+                $.getJSON('tags', function (data) {
                     $.each(data.tags, function (index, element) {
                         console.log("Current tags: " + tags);
                         if (tags != null && tags != "" && tags != true && tags.indexOf(element) > -1) {
@@ -231,7 +231,7 @@ _________________________________________________________ -->
                 });
 
 
-                $.getJSON('/catalogue', {page: page, size: size, tags: tags}, function (data) {
+                $.getJSON('catalogue', {page: page, size: size, tags: tags}, function (data) {
                     if (data != null) {
                         $.each(data, function (index, element) {
                             $('#products').append('<div class="col-md-4 col-sm-6">\

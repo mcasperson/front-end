@@ -4,6 +4,11 @@ provider:
   runtime: nodejs12.x
   stage: dev
   region: us-east-1
+  environment:
+    CATALOGUE_BASE_URL: https://7f28plmnc2.execute-api.us-east-1.amazonaws.com/dev
+    CARTS_BASE_URL: https://km71k3zb9c.execute-api.us-east-1.amazonaws.com/dev
+    ORDERS_BASE_URL: https://uuyd7yyey0.execute-api.us-east-1.amazonaws.com/dev
+    USERS_BASE_URL: https://guqxh87rri.execute-api.us-east-1.amazonaws.com/dev
 
 functions:
   app:
