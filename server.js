@@ -59,7 +59,7 @@ if (!process.env.LAMBDA_TASK_ROOT) {
         console.log("App now running in %s mode on port %d", app.get("env"), port);
     });
 } else {
-    const server = awsServerlessExpress.createServer(app, null, ["image/jpeg"])
+    const server = awsServerlessExpress.createServer(app, null, ["image/jpeg", "image/png"])
     exports.handler = (event, context) => { awsServerlessExpress.proxy(server, event, context) }
 }
 
