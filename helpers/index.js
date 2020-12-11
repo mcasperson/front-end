@@ -22,12 +22,6 @@
       send(ret);
   };
 
-  helpers.sessionMiddleware = function(err, req, res, next) {
-    if(!req.cookies.logged_in) {
-      res.session.customerId = null;
-    }
-  };
-
   /* Responds with the given body and status 200 OK  */
   helpers.respondSuccessBody = function(res, body) {
     helpers.respondStatusBody(res, 200, body);
@@ -93,14 +87,10 @@
     }
 
     if (!logged_in) {
-      if (!req.session.id) {
         throw new Error("User not logged in.");
-      }
-      // Use Session ID instead
-      return req.session.id;
     }
 
-    return req.session.customerId;
+    return logged_in;
   }
   module.exports = helpers;
 }());

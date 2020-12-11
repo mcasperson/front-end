@@ -5,7 +5,7 @@
 
 
     app.get("/customers/:id", function(req, res, next) {
-        helpers.simpleHttpRequest(endpoints.customersUrl + "/" + req.session.customerId, res, next);
+        helpers.simpleHttpRequest(endpoints.customersUrl + "/" + req.params.id, res, next);
     });
     app.get("/cards/:id", function(req, res, next) {
         helpers.simpleHttpRequest(endpoints.cardsUrl + "/" + req.params.id, res, next);
@@ -201,8 +201,7 @@
                             }
                             console.log(body);
                             var customerId = body.id;
-                            console.log(customerId);
-                            req.session.customerId = customerId;
+                            console.log("Customer id: " + customerId);
                             callback(null, customerId);
                             return;
                         }
@@ -211,11 +210,10 @@
                     });
                 },
                 function(custId, callback) {
-                    var sessionId = req.session.id;
-                    console.log("Merging carts for customer id: " + custId + " and session id: " + sessionId);
+                    console.log("Merging carts for customer id: " + custId);
 
                     var options = {
-                        uri: endpoints.cartsUrl + "/" + custId + "/merge" + "?sessionId=" + sessionId,
+                        uri: endpoints.cartsUrl + "/" + custId + "/merge",
                         method: 'GET'
                     };
                     request(options, function(error, response, body) {
@@ -237,7 +235,7 @@
                 }
                 console.log("set cookie" + custId);
                 res.status(200);
-                res.cookie(cookie_name, req.session.id, {
+                res.cookie(cookie_name, custId, {
                     maxAge: 3600000
                 }).send({id: custId});
                 console.log("Sent cookies.");
@@ -267,7 +265,6 @@
                             console.log(body);
                             var customerId = JSON.parse(body).user.id;
                             console.log(customerId);
-                            req.session.customerId = customerId;
                             callback(null, customerId);
                             return;
                         }
@@ -276,11 +273,10 @@
                     });
                 },
                 function(custId, callback) {
-                    var sessionId = req.session.id;
-                    console.log("Merging carts for customer id: " + custId + " and session id: " + sessionId);
+                    console.log("Merging carts for customer id: " + custId);
 
                     var options = {
-                        uri: endpoints.cartsUrl + "/" + custId + "/merge" + "?sessionId=" + sessionId,
+                        uri: endpoints.cartsUrl + "/" + custId + "/merge",
                         method: 'GET'
                     };
                     request(options, function(error, response, body) {
@@ -302,7 +298,7 @@
                     return;
                 }
                 res.status(200);
-                res.cookie(cookie_name, req.session.id, {
+                res.cookie(cookie_name, custId, {
                     maxAge: 3600000
                 }).send('Cookie is set');
                 console.log("Sent cookies.");

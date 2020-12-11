@@ -172,7 +172,9 @@ function username(id, callback) {
         url: "customers/" + id,
         type: "GET",
         success: function (data, textStatus, jqXHR) {
-            json = JSON.parse(data);
+            //json = JSON.parse(data);
+            json = data;
+
             if (json.status_code !== 500) {
                 callback(json.firstName + " " + json.lastName);
             } else {

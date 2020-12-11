@@ -31,7 +31,6 @@ else {
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(helpers.sessionMiddleware);
 app.use(morgan("dev", {}));
 
 var domain = "";
