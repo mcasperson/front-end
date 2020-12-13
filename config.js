@@ -5,6 +5,7 @@
       RedisStore   = require('connect-redis')(session)
 
   module.exports = {
+    baseUrl: process.env.BASE_URL || '/',
     session: {
       name: 'md.sid',
       secret: 'sooper secret',
