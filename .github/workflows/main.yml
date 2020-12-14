@@ -32,7 +32,7 @@ jobs:
     #
     #
     # Install dependencies
-    - run: yarn install
+    - run: npm install
 
     - name: Create ZIP file
       run: |
