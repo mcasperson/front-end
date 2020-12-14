@@ -17,21 +17,23 @@ var request      = require("request")
   , awsServerlessExpress = require('aws-serverless-express')
 
 
-app.use(helpers.rewriteSlash);
-app.use(metrics);
-app.use(express.static("public"));
+const indexRouter = express.Router();
+
+indexRouter.use(helpers.rewriteSlash);
+indexRouter.use(metrics);
+indexRouter.use(express.static("public"));
 if(process.env.SESSION_REDIS) {
     console.log('Using the redis based session manager');
-    app.use(session(config.session_redis));
+    indexRouter.use(session(config.session_redis));
 }
 else {
     console.log('Using local session manager');
-    app.use(session(config.session));
+    indexRouter.use(session(config.session));
 }
 
-app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(morgan("dev", {}));
+indexRouter.use(bodyParser.json());
+indexRouter.use(cookieParser());
+indexRouter.use(morgan("dev", {}));
 
 var domain = "";
 process.argv.forEach(function (val, index, array) {
@@ -45,12 +47,14 @@ process.argv.forEach(function (val, index, array) {
 });
 
 /* Mount API endpoints */
-app.use(cart);
-app.use(catalogue);
-app.use(orders);
-app.use(user);
+indexRouter.use(cart);
+indexRouter.use(catalogue);
+indexRouter.use(orders);
+indexRouter.use(user);
 
-app.use(helpers.errorHandler);
+indexRouter.use(helpers.errorHandler);
+
+app.use(config.baseUrl, indexRouter);
 
 if (!process.env.LAMBDA_TASK_ROOT) {
     var server = app.listen(process.env.PORT || 8079, function () {
