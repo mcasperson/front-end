@@ -82,6 +82,7 @@
                 console.log("GET Request to: " + addressLink);
                 request.get(addressLink, function (error, response, body) {
                   if (error) {
+                    console.log("GET Request to: " + addressLink + " returned error " + error);
                     callback(error);
                     return;
                   }
@@ -97,6 +98,7 @@
                 console.log("GET Request to: " + cardLink);
                 request.get(cardLink, function (error, response, body) {
                   if (error) {
+                    console.log("GET Request to: " + cardLink + " returned error " + error);
                     callback(error);
                     return;
                   }
