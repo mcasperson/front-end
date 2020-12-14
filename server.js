@@ -16,7 +16,6 @@ var request      = require("request")
   , app          = express()
   , awsServerlessExpress = require('aws-serverless-express')
 
-
 const indexRouter = express.Router();
 
 indexRouter.use(helpers.rewriteSlash);
